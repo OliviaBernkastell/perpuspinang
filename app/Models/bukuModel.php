@@ -1,0 +1,25 @@
+<?php 
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class BukuModel extends Model
+{
+  protected $table = "buku";
+  protected $id = "id";
+  protected $allowedFields = ['id_publikasi', 'judul', 'hardcopy'];
+
+  public function getBuku($id = false){
+    if($id==false){
+      return $this->findAll();
+    }
+    return $this->where(['id' => $id])->first();
+  }
+  public function getBukuById($id_buku = false){
+    return $this->where(['id_publikasi' => $id_buku])->first();
+  }
+  public function getBukuByJudul($judul = false){
+    return $this->where(['judul' => $judul])->first();
+  }
+}

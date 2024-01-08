@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+:root {
+  --white-color: #fff;
+  --whitedark-color: #dedede;
+  --whitehalf-color: #ffffff7b;
+  --blue-color: #4070f4;
+  --bluehalf-color: #7195f9;
+  --grey-color: #707070;
+  --grey-color-light: #aaa;
+  --red-color: #f44040;
+  --redhalf-color: #ff6e6e;
+  --green-color: #86ff65;
+  --gradient-color: linear-gradient(19deg, #21d4fd, #b721ff);
+}
+body {
+  transition: all 0.5s ease;
+  background: var(--gradient-color);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.main {
+  position: relative;
+  margin: 10px 0px 0px 0px;
+  padding: 10px 10px 10px 10px;
+  transition: all 0.5s ease;
+  border-radius: 25px;
+  background: transparent;
+  /* border-color: var(--white-color);
+  border-style: solid; */
+  width: 100%;
+  height: 85vh;
+}
+.judul {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: var(--white-color);
+}
+.tabel {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  border-radius: 10px; /* Set border-radius to round the corners */
+  overflow: hidden;
+}
+.tabel > thead > tr > th {
+  font-weight: 500;
+  padding: 5px;
+  background-color: var(--whitehalf-color);
+  color: var(--white-color);
+  text-align: center;
+  vertical-align: middle;
+}
+.tabel > tbody > tr > td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: var(--white-color);
+  color: var(--grey-color);
+  text-align: center;
+  vertical-align: middle;
+}
+.tabel-modal {
+  width: 100%;
+}
+.th-modal > th {
+  color: black;
+  font-weight: 500;
+}
