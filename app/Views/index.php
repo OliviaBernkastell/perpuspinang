@@ -51,30 +51,42 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel<?= $b['id']; ?>">&nbsp&nbsp&nbspID-Publikasi:<?= $b['id_publikasi']; ?></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body" style="overflow: auto; white-space: nowrap;">
                 <table class="tabel-modal">
                   <thead>
                     <tr class="th-modal">
-                      <th>Ruang</th>
-                      <th>Lorong</th>
-                      <th>RAK</th>
                       <th>Versi</th>
                       <th>Bulan</th>
                       <th>Tahun</th>
                       <th>Penerbit</th>
+                      <th>Ruang</th>
+                      <th>Lorong</th>
+                      <th>RAK</th>
+                      <th>Status BMN</th>
+                      <th>Kode BMN</th>
+                      <th>NUP</th>
+                      <th>Harga (Rp)</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php foreach ($versi as $v) : ?>
                       <?php if ($v['id_buku'] == $b['id']) { ?>
-                        <tr>
-                          <td><?= $v['ruang']; ?></td>
-                          <td><?= $v['lorong']; ?></td>
-                          <td><?= $v['rak']; ?></td>
+                        <tr class="td-modal">
                           <td><?= $v['versi']; ?></td>
                           <td><?= $v['bulan']; ?></td>
                           <td><?= $v['tahun']; ?></td>
                           <td class="text-start"><?= $v['penerbit']; ?></td>
+                          <td><?= $v['ruang']; ?></td>
+                          <td><?= $v['lorong']; ?></td>
+                          <td><?= $v['rak']; ?></td>
+                          <?php if ($v['status_bmn']==1) { ?>
+                          <td>Termasuk BMN</td>
+                          <?php } else { ?>
+                          <td>Bukan BMN</td>
+                          <?php };?>
+                          <td><?= $v['kode_bmn']; ?></td>
+                          <td><?= $v['nup']; ?></td>
+                          <td><?= $v['harga']; ?></td>
                         </tr>
                       <?php }; ?>
                     <?php endforeach; ?>
