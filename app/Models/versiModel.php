@@ -8,7 +8,7 @@ class VersiModel extends Model
 {
   protected $table = "versi";
   protected $id = "id";
-  protected $allowedFields = ['id_buku','ruang','lorong','rak','baris','status_bmn','kode_bmn','nup','harga'];
+  protected $allowedFields = ['id_buku','versi','bulan','tahun','penerbit','ruang','lorong','rak','baris','status_bmn','kode_bmn','nup','harga'];
 
   public function getVersi($id = false){
     if($id==false){
