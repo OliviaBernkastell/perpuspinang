@@ -20,11 +20,22 @@ class Buku extends BaseController
     ]);
     return redirect()->to('/home');
   }
-  public function hapus($id){
+  public function hapus($id)
+  {
     $this->bukuModel = new BukuModel();
     $gambar = $this->bukuModel->getBuku($id);
 
     $this->bukuModel->delete($id);
+    return redirect()->to('/home');
+  }
+  public function edit($id)
+  {
+    $this->bukuModel = new BukuModel();
+    $data = [
+      'id_publikasi' => $this->request->getVar('id_publikasi'),
+      'judul' => $this->request->getVar('judul'),
+    ];
+    $this->bukuModel->update($id, $data);
     return redirect()->to('/home');
   }
 }

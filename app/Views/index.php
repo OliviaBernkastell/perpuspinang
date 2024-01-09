@@ -30,6 +30,7 @@
             <th>ID-Publikasi</th>
             <th>Judul Publikasi</th>
             <th>Hardcopy</th>
+            <th>Softcopy</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -39,18 +40,19 @@
               <td><?= $b['id_publikasi']; ?></td>
               <td class="text-start"><?= $b['judul']; ?></td>
               <td><?= $b['hardcopy']; ?></td>
+              <td><?= $b['softcopy']; ?></td>
               <td>
                 <div style="overflow: visible;" class="btn-group">
                   <button type="button" class="dropdown-toggle btnModal lihat" data-bs-toggle="dropdown" aria-expanded="false">
                     Aksi
                   </button>
                   <ul class="dropdown-menu">
-                    <?php if ($b['hardcopy'] != 0) { ?>
+                    <?php if ($b['hardcopy'] != 0 || $b['softcopy'] != 0 ) { ?>
                       <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#lihatModal<?= $b['id']; ?>">Lihat</button></li>
                     <?php } else { ?>
                       <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#BuatVersiModal<?= $b['id']; ?>">Tambah</button></li>
                     <?php } ?>
-                    <li><button class="dropdown-item" type="button">Edit</button></li>
+                    <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#editModal<?= $b['id']; ?>">Edit</button></li>
                     <li>
                       <hr class="dropdown-divider">
                     </li>
@@ -59,6 +61,7 @@
                 </div>
               </td>
             </tr>
+
           <?php endforeach; ?>
         </tbody>
       </table>
@@ -75,6 +78,7 @@
                 <table class="tabel-modal">
                   <thead>
                     <tr class="th-modal">
+                      <th>Aksi</th>
                       <th>Versi</th>
                       <th>Bulan</th>
                       <th>Tahun</th>
@@ -82,16 +86,13 @@
                       <th>Ruang</th>
                       <th>Lorong</th>
                       <th>RAK</th>
-                      <th>Status BMN</th>
-                      <th>Kode BMN</th>
-                      <th>NUP</th>
-                      <th>Harga (Rp)</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php foreach ($versi as $v) : ?>
                       <?php if ($v['id_buku'] == $b['id']) { ?>
                         <tr class="td-modal">
+                          <td>Button</td>
                           <td><?= $v['versi']; ?></td>
                           <td><?= $v['bulan']; ?></td>
                           <td><?= $v['tahun']; ?></td>
@@ -99,14 +100,6 @@
                           <td><?= $v['ruang']; ?></td>
                           <td><?= $v['lorong']; ?></td>
                           <td><?= $v['rak']; ?></td>
-                          <?php if ($v['status_bmn'] == 1) { ?>
-                            <td>Termasuk BMN</td>
-                          <?php } else { ?>
-                            <td>Bukan BMN</td>
-                          <?php }; ?>
-                          <td><?= $v['kode_bmn']; ?></td>
-                          <td><?= $v['nup']; ?></td>
-                          <td><?= $v['harga']; ?></td>
                         </tr>
                       <?php }; ?>
                     <?php endforeach; ?>
@@ -120,23 +113,46 @@
           </div>
         </div>
         <div class="modal fade" id="hapusModal<?= $b['id']; ?>" tabindex="-1" aria-labelledby="hapusModalLabel<?= $b['id']; ?>" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="hapusModal<?= $b['id']; ?>">Hapus <?= $b['judul']; ?> ?</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                  <form action="<?= base_url('/Buku/hapus/') ;?><?= $b['id']; ?>" method="post">
-                    <?= csrf_field(); ?>
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button class="btnModal biru">Ya</button>
-                  </form>
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <h1 class="modal-title fs-5 text-center" id="hapusModal<?= $b['id']; ?>">Hapus <?= $b['judul']; ?> ?</h1>
+              <div class="modal-footer" style="display: flex;   justify-content: center;">
+                <form action="<?= base_url('/Buku/hapus/'); ?><?= $b['id']; ?>" method="post">
+                  <?= csrf_field(); ?>
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="btnModal biru">Ya</button>
                   <button type="button" class="btnModal merah" data-bs-dismiss="modal">Tidak</button>
-                </div>
+                </form>
               </div>
             </div>
           </div>
+        </div>
+        <div class="modal fade" id="editModal<?= $b['id']; ?>" tabindex="-1" aria-labelledby="editModalLabel<?= $b['id']; ?>" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editModal<?= $b['id']; ?>">Edit <?= $b['judul']; ?> ?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="<?= base_url('/Buku/edit/'); ?><?= $b['id']; ?>" method="post">
+                <?= csrf_field(); ?>
+                <div class=" modal-body">
+                  <div class=" mb-3">
+                    <input type="text" class="form-control" id="id_publikasi" placeholder="ID-Publikasi" name="id_publikasi" value="<?= $b['id_publikasi']; ?>" required />
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="judul" placeholder="Judul Buku" name="judul" value="<?= $b['judul']; ?>" required />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btnModal merah" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btnModal biru">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
       <?php endforeach; ?>
     </div>
 
@@ -146,22 +162,22 @@
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="BukuBuatModalLabel">Buat Buku</h1>
           </div>
+          <form action="<?= base_url('/Buku/buat'); ?>" method="post"">
+            <?= csrf_field(); ?>
 
-          <div class=" modal-body">
-            <form action="<?= base_url('/Buku/buat'); ?>" method="post"">
-           <?= csrf_field(); ?>
-              <div class=" mb-3">
+            <div class=" modal-body">
+            <div class=" mb-3">
               <input type="text" class="form-control" id="id_publikasi" placeholder="ID-Publikasi" name="id_publikasi" required />
-          </div>
-          <div class="mb-3">
-            <input type="text" class="form-control" id="judul" placeholder="Judul Buku" name="judul" required />
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btnModal merah" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btnModal biru">Submit</button>
-          </div>
-          </form>
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control" id="judul" placeholder="Judul Buku" name="judul" required />
+            </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btnModal merah" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btnModal biru">Submit</button>
+        </div>
+        </form>
       </div>
     </div>
   </div>

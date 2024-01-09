@@ -8,7 +8,7 @@ class BukuModel extends Model
 {
   protected $table = "buku";
   protected $id = "id";
-  protected $allowedFields = ['id_publikasi', 'judul', 'hardcopy'];
+  protected $allowedFields = ['id_publikasi', 'judul', 'hardcopy','softcopy'];
 
   public function getBuku($id = false){
     if($id==false){
