@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\BukuModel;
+use App\Models\VersiModel;
 
 class Home extends BaseController
 {
+    protected $bukaModel;
+    protected $versiModel;
+
     public function index(): string
     {
         $buku = array(
@@ -16,6 +21,12 @@ class Home extends BaseController
             array('id'=> 3, 'id_buku'=> 1, 'ruang'=>1, 'versi'=>'Vol. 7 No 92', 'lorong'=>1, 'rak'=>1,'baris'=>1,'bulan'=>'Agustus','tahun'=>'2021', 'penerbit'=>'Bank Indonesia',                                     'status_bmn'=>'0','kode_bmn'=>'-'        ,'nup'=>'-'     ,'harga'=>'-'),
             array('id'=> 4, 'id_buku'=> 2, 'ruang'=>1, 'versi'=>'Edisi 85',     'lorong'=>1, 'rak'=>2,'baris'=>1,'bulan'=>'April',  'tahun'=>'2013', 'penerbit'=>'Dinas Pariwisata dan Kebudayaan Kota Tanjungpinang', 'status_bmn'=>'0','kode_bmn'=>'-'        ,'nup'=>'-'     ,'harga'=>'-'),
         );
+        $this->bukaModel = new BukuModel();
+        $this->versiModel = new VersiModel();
+
+        $buku = $this->bukaModel->getBuku();
+        $versi = $this->versiModel->getVersi();
+
         $data = [
             'title' => 'Perpus Pinang | PST',
             'buku' => $buku,

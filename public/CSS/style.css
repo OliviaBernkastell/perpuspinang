@@ -89,3 +89,76 @@ body {
   font-weight: 300;
   padding: 5px;
 }
+.iconList{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  color: var(--white-color);
+  background-color: transparent;
+  outline: none;
+  text-decoration: none;
+  border-color: transparent;
+  border-style: solid;
+}
+.iconList:hover{
+  cursor: pointer;
+  color: var(--whitehalf-color);
+}
+.iconList:active{
+  cursor: pointer;
+  color: var(--white-color);
+}
+.custom-tooltip {
+  --bs-tooltip-bg: var(--whitehalf-color);
+  --bs-tooltip-color: var(--white-color);
+}
+.judulList{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+.spanJudul{
+  padding-top: 20px;
+}
+.btnModal{
+  color: var(--white-color);
+  padding: 5px;
+  font-size:medium;
+  width: 70px;
+}
+
+.btnModal.lihat{
+  background-color: var(--grey-color);
+  border-style: solid;
+  border-color: var(--grey-color);
+  border-radius: 10px;
+}
+.btnModal.lihat:hover{
+  background-color: var(--white-color);
+  border-color: var(--grey-color);
+  color: var(--grey-color);
+}
+.btnModal.biru{
+  background-color: var(--blue-color);
+  border-style: solid;
+  border-color: var(--blue-color);
+  border-radius: 10px;
+}
+.btnModal.biru:hover{
+  background-color: var(--white-color);
+  border-color: var(--blue-color);
+  color: var(--blue-color);
+}
+.btnModal.merah{
+  background-color: var(--red-color);
+  border-style: solid;
+  border-color: var(--red-color);
+  border-radius: 10px;
+}
+.btnModal.merah:hover{
+  background-color: var(--white-color);
+  border-color: var(--red-color);
+  color: var(--red-color);
+}
