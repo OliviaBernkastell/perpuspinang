@@ -162,3 +162,9 @@ body {
   border-color: var(--red-color);
   color: var(--red-color);
 }
+.tahun{
+  border: 1px solid var(--grey-color-light);
+  border-radius: 3px;
+  padding: 5px;
+  width: 20%;
+}
