@@ -24,52 +24,61 @@
     </div>
 
     <div class="main">
-      <table class="tabel" style="overflow: visible;">
-        <thead class="fs-4 text-white">
-          <tr>
-            <th>ID-Publikasi</th>
-            <th>Judul Publikasi</th>
-            <th>Hardcopy</th>
-            <th>Softcopy</th>
-            <th>Aksi</th>
-          </tr>
-        </thead>
-        <tbody class="fs-4 text-white">
-          <?php foreach ($buku as $b) : ?>
+      <form action="<?= base_url('/Home'); ?>" method="post">
+        <div class="input-group mb-3" style="background-color: transparent;">
+          <input name="keyword" type="text" class="form-control cari shadow-none" placeholder="judul buku..." aria-label="Recipient's username" aria-describedby="button-addon2">
+          <button class="btnModal putih" name="submit" type="submit" id="button-addon2">Cari</button>
+        </div>
+      </form>
+      <div>
+        <table class="tabel">
+          <thead class="fs-4 text-white">
             <tr>
-              <td><?= $b['id_publikasi']; ?></td>
-              <td class="text-start"><?= $b['judul']; ?></td>
-              <td><?= $b['hardcopy']; ?></td>
-              <td><?= $b['softcopy']; ?></td>
-              <td>
-                <div style="overflow: visible;" class="btn-group">
-                  <button type="button" class="dropdown-toggle btnModal lihat" data-bs-toggle="dropdown" aria-expanded="false">
-                    Aksi
-                  </button>
-                  <ul class="dropdown-menu">
-                    <?php if ($b['hardcopy'] != 0 || $b['softcopy'] != 0) { ?>
-                      <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#lihatModal<?= $b['id']; ?>">Lihat</button></li>
-                    <?php }; ?>
-                    <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#VersiBuatModal<?= $b['id']; ?>">Tambah</button></li>
-                    <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#editModal<?= $b['id']; ?>">Edit</button></li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $b['id']; ?>">Hapus</button></li>
-                  </ul>
-                </div>
-              </td>
+              <th>ID-Publikasi</th>
+              <th>Judul Publikasi</th>
+              <th>Hardcopy</th>
+              <th>Softcopy</th>
+              <th>Aksi</th>
             </tr>
+          </thead>
+          <tbody class="fs-4 text-white">
+            <?php foreach ($buku as $b) : ?>
+              <tr>
+                <td><?= $b['id_publikasi']; ?></td>
+                <td class="text-start"><?= $b['judul']; ?></td>
+                <td><?= $b['hardcopy']; ?></td>
+                <td><?= $b['softcopy']; ?></td>
+                <td>
+                  <div style="overflow: visible;" class="btn-group">
+                    <button style="width: 50px;" type="button" class="dropdown-toggle btnModal lihat" data-bs-toggle="dropdown" aria-expanded="false">
+                      A
+                    </button>
+                    <ul class="dropdown-menu">
+                      <?php if ($b['hardcopy'] != 0 || $b['softcopy'] != 0) { ?>
+                        <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#lihatModal<?= $b['id']; ?>">Lihat</button></li>
+                      <?php }; ?>
+                      <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#VersiBuatModal<?= $b['id']; ?>">Tambah</button></li>
+                      <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#editModal<?= $b['id']; ?>">Edit</button></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $b['id']; ?>">Hapus</button></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
 
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-      <tfoot>
-        <tr>
-          <td colspan="3">Halaman</td>
-          <td colspan="2"><?= $pagerBuku->links() ?></td>
-        </tr>
-      </tfoot>
+            <?php endforeach; ?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Halaman</td>
+              <td colspan="2"><?= $pagerBuku->links() ?></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
       <?php foreach ($buku as $b) : ?>
         <div class="modal fade" id="lihatModal<?= $b['id']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatModalLabel<?= $b['id']; ?>" aria-hidden="true">
           <div class="modal-dialog modal-xl">
@@ -116,12 +125,6 @@
                       <?php }; ?>
                     <?php endforeach; ?>
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="5">Halaman</td>
-                      <td colspan="5">1 2 3</td>
-                    </tr>
-                  </tfoot>
                 </table>
               </div>
               <div class=" modal-footer">

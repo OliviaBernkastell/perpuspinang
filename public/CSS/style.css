@@ -76,6 +76,14 @@ body {
   text-align: center;
   vertical-align: middle;
 }
+.tabel > tfoot > tr > td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: var(--white-color);
+  color: var(--grey-color);
+  text-align: center;
+  vertical-align: middle;
+}
 .tabel-modal {
   width: 100%;
 }
@@ -162,9 +170,57 @@ body {
   border-color: var(--red-color);
   color: var(--red-color);
 }
+.btnModal.putih{
+  background-color: var(--white-color);
+  border-style: solid;
+  border-color: var(--white-color);
+  border-radius: 10px;
+  color: var(--grey-color)
+}
+.btnModal.putih:hover{
+  background-color: transparent;
+  border-color: var(--white-color);
+  color: var(--white-color);
+}
+.cari{
+  background-color: transparent;
+  color: white;
+  font-weight: 500;
+  border: 2px solid var(--white-color);
+}
+.cari::placeholder{
+  color: var(--whitehalf-color);
+}
+.cari:focus{
+  background-color: transparent;
+  color: white;
+  font-weight: 500;
+  border: 2px solid var(--white-color);
+  outline: none;
+}
 .tahun{
   border: 1px solid var(--grey-color-light);
   border-radius: 3px;
   padding: 5px;
   width: 20%;
+}
+.Lipager{
+  border: 2px solid var(--grey-color);
+  width: 20%;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+.Lipager > a{
+  color: var(--grey-color);
+}
+.Lipager:hover{
+  border: 2px solid var(--white-color);
+  background-color: var(--grey-color);
+}
+.Lipager:hover > a{
+  color: var(--white-color);
+}
+.Apager{
+  text-decoration: none;
+  padding: 5px;
 }

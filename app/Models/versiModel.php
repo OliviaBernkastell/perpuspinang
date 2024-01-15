@@ -12,7 +12,7 @@ class VersiModel extends Model
 
   public function getVersi($id = false){
     if($id==false){
-      return $this->findAll();
+      return $this->orderBy('tahun','desc')->findAll();
     }
     return $this->where(['id' => $id])->first();
   }

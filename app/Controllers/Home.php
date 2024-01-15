@@ -17,10 +17,17 @@ class Home extends BaseController
         $buku = $this->bukuModel->getBuku();
         $versi = $this->versiModel->getVersi();
 
+        $keyword = $this->request->getVar('keyword');
+        if ($keyword) {
+            $buku = $this->bukuModel->search($keyword);
+        } else {
+            $buku = $this->bukuModel;
+        }
+
         $data = [
             'title' => 'Perpus Pinang | PST',
             'versi' => $versi,
-            'buku' => $this->bukuModel->orderBy('judul', 'desc')->paginate(10),
+            'buku' => $buku->orderBy('id', 'asc')->paginate(10),
             'pagerBuku' => $this->bukuModel->pager
         ];
         return view('index',$data);

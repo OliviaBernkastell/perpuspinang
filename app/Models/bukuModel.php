@@ -22,4 +22,7 @@ class BukuModel extends Model
   public function getBukuByJudul($judul = false){
     return $this->where(['judul' => $judul])->first();
   }
+  public function search($keyword){
+    return $this->table('buku')->like('judul',$keyword);
+  }
 }
