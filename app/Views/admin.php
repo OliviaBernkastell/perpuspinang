@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link flex href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="<?= base_url('/CSS/style.css') ?>" />
-  <link rel="icon" type="image/x-icon" href="<?= base_url('/IMG/logo2.png') ?>">
+  <link rel="icon" type="image/x-icon" href="<?= base_url('/IMG/logo.png') ?>">
 </head>
 
 <body>
