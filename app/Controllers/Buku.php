@@ -12,6 +12,9 @@ class Buku extends BaseController
 
   public function buat()
   {
+    if (!session('admin')) {
+      return redirect()->to('admin');
+    }
     $this->bukuModel = new BukuModel();
     $this->bukuModel->save([
       'id_publikasi' => $this->request->getVar('id_publikasi'),
@@ -22,6 +25,9 @@ class Buku extends BaseController
   }
   public function hapus($id)
   {
+    if (!session('admin')) {
+      return redirect()->to('admin');
+    }
     $this->bukuModel = new BukuModel();
     $gambar = $this->bukuModel->getBuku($id);
 
@@ -30,6 +36,9 @@ class Buku extends BaseController
   }
   public function edit($id)
   {
+    if (!session('admin')) {
+      return redirect()->to('admin');
+    }
     $this->bukuModel = new BukuModel();
     $data = [
       'id_publikasi' => $this->request->getVar('id_publikasi'),

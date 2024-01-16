@@ -47,6 +47,31 @@ body {
   width: 100%;
   height: 85vh;
 }
+.main_login{
+  background-color: white; 
+  width: 50%; 
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 50vh;
+  border-radius: 25px;
+}
+.isi_login{
+  margin-top: auto;
+}
+.divBP{
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 20px;
+}
+.divBP > div{
+  margin-top: 20px;
+}
+.divBP > p{
+  padding-top: 10px;
+  color: var(--grey-color);
+}
 .judul {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -57,7 +82,9 @@ body {
   margin-left: auto;
   margin-right: auto;
   border-collapse: collapse;
-  border-radius: 10px; /* Set border-radius to round the corners */
+  border-radius: 20px;
+  border-style: solid;
+  border-color: white;
   overflow: hidden;
 }
 .tabel > thead > tr > th {

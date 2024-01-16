@@ -25,4 +25,13 @@ class BukuModel extends Model
   public function search($keyword){
     return $this->table('buku')->like('judul',$keyword);
   }
+  public function getPaginated($n,$keyword=null){
+    if ($keyword) {
+      $this->builder()->like('judul',$keyword);
+    }
+    return[
+      'buku'=>$this->orderBy('id', 'asc')->paginate($n),
+      'pagerBuku'=>$this->pager,
+    ];
+  }
 }

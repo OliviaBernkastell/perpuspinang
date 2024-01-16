@@ -17,17 +17,23 @@
 <body>
   <div class="container text-center">
     <div class="judulList">
+      <?php if (session()->get('admin')) { ?>
+        <p class="h1 judul">Admin</p>
+      <?php }; ?>
       <p class="h1 judul">PUSTAKA</p>
       <!-- Admin -->
-      <button type="button" class="bi bi-plus-circle-fill iconList" data-bs-toggle="modal" data-bs-target="#BukuBuatModal">
-      </button>
+      <?php if (session()->get('admin')) { ?>
+        <button type="button" class="bi bi-plus-circle-fill iconList" data-bs-toggle="modal" data-bs-target="#BukuBuatModal"> </button>
+        <button type="button" class="bi bi-door-closed-fill iconList" data-bs-toggle="modal" data-bs-target="#LogoutModal"></button>
+      <?php }; ?>
+
     </div>
 
     <div class="main">
-      <form action="<?= base_url('/Home'); ?>" method="post">
+      <form action="" method="get">
         <div class="input-group mb-3" style="background-color: transparent;">
           <input name="keyword" type="text" class="form-control cari shadow-none" placeholder="judul buku..." aria-label="Recipient's username" aria-describedby="button-addon2">
-          <button class="btnModal putih" name="submit" type="submit" id="button-addon2">Cari</button>
+          <button class="btnModal putih" type="submit" id="button-addon2">Cari</button>
         </div>
       </form>
       <div>
@@ -57,12 +63,15 @@
                       <?php if ($b['hardcopy'] != 0 || $b['softcopy'] != 0) { ?>
                         <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#lihatModal<?= $b['id']; ?>">Lihat</button></li>
                       <?php }; ?>
-                      <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#VersiBuatModal<?= $b['id']; ?>">Tambah</button></li>
-                      <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#editModal<?= $b['id']; ?>">Edit</button></li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-                      <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $b['id']; ?>">Hapus</button></li>
+                      <?php if (session()->get('admin')) { ?>
+                        <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#VersiBuatModal<?= $b['id']; ?>">Tambah</button></li>
+                        <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#editModal<?= $b['id']; ?>">Edit</button></li>
+                        <li>
+                          <hr class="dropdown-divider">
+                        </li>
+                        <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $b['id']; ?>">Hapus</button></li>
+                      <?php }; ?>
+
                     </ul>
                   </div>
                 </td>
@@ -92,7 +101,9 @@
                 <table class="tabel-modal">
                   <thead>
                     <tr class="th-modal">
-                      <th>Aksi</th>
+                      <?php if (session()->get('admin')) { ?>
+                        <th>Aksi</th>
+                      <?php }; ?>
                       <th>Versi</th>
                       <th>Bulan</th>
                       <th>Tahun</th>
@@ -108,10 +119,12 @@
                     <?php foreach ($versi as $v) : ?>
                       <?php if ($v['id_buku'] == $b['id']) { ?>
                         <tr class="td-modal">
-                          <td>
-                            <button style="width: 50px;" class="btnModal biru" type="button" data-bs-toggle="modal" data-bs-target="#VersiEditModal<?= $v['id']; ?>"><i class="bi bi-pen-fill"></i></button>
-                            <button style="width: 50px;" class="btnModal merah" type="button" data-bs-toggle="modal" data-bs-target="#hapusVersiModal<?= $v['id']; ?>"><i class="bi bi-trash-fill"></i></button>
-                          </td>
+                          <?php if (session()->get('admin')) { ?>
+                            <td>
+                              <button style="width: 50px;" class="btnModal biru" type="button" data-bs-toggle="modal" data-bs-target="#VersiEditModal<?= $v['id']; ?>"><i class="bi bi-pen-fill"></i></button>
+                              <button style="width: 50px;" class="btnModal merah" type="button" data-bs-toggle="modal" data-bs-target="#hapusVersiModal<?= $v['id']; ?>"><i class="bi bi-trash-fill"></i></button>
+                            </td>
+                          <?php }; ?>
                           <td><?= $v['versi']; ?></td>
                           <td><?= $v['bulan']; ?></td>
                           <td><?= $v['tahun']; ?></td>
@@ -347,6 +360,19 @@
           </div>
         </div>
       <?php endforeach; ?>
+      <div class="modal fade" id="LogoutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="LogoutModalLabel" aria-hidden="true">
+        <div style="width: 20%;" class="modal-dialog modal-dialog-centered">
+          <div class="modal-content text-center">
+            <h1 class="modal-title fs-5 text-center" id="LogoutModal">Logout?</h1>
+            <div class="modal-footer" style="display: flex;   justify-content: center;">
+              <a href="<?= base_url('/Home/keluar'); ?>">
+                <button class="btnModal biru">Ya</button>
+              </a>
+              <button type="button" class="btnModal merah" data-bs-dismiss="modal">Tidak</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="modal fade" id="BukuBuatModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BukuBuatModalLabel" aria-hidden="true">
@@ -373,7 +399,6 @@
         </form>
       </div>
     </div>
-  </div>
   </div>
   <script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
   </script>

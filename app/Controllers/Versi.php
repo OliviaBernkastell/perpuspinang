@@ -47,6 +47,9 @@ class Versi extends BaseController
 
   public function buat($id_buku)
   {
+    if (!session('admin')) {
+      return redirect()->to('admin');
+    }
     if ($this->request->getVar('softcopy')) {
       $softcopy = 1;
     } else {
@@ -73,6 +76,9 @@ class Versi extends BaseController
   }
   public function edit($id)
   {
+    if (!session('admin')) {
+      return redirect()->to('admin');
+    }
     if ($this->request->getVar('softcopy')) {
       $softcopy = 1;
     } else {
@@ -100,6 +106,9 @@ class Versi extends BaseController
   }
   public function hapus($id)
   {
+    if (!session('admin')) {
+      return redirect()->to('admin');
+    }
     $this->versiModel = new VersiModel();
     $id_buku = $this->versiModel->getVersi($id);
     $id_buku = $id_buku['id_buku'];
